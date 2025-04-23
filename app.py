@@ -1,6 +1,9 @@
-from flask import Flask, request, jsonify, render_template
 import os
+import threading
+import time
 import logging
+import schedule
+from flask import Flask, request, jsonify, render_template
 from src.system import SocialMediaAutomationSystem
 
 # Configure logging
@@ -18,6 +21,75 @@ app = Flask(__name__)
 base_dir = os.path.dirname(os.path.abspath(__file__))
 system = SocialMediaAutomationSystem(base_dir)
 
+# Worker functions
+def run_scheduler():
+    """Run the scheduler to process pending posts"""
+    logger.info("Running scheduler")
+    
+    try:
+        # Start the scheduler
+        system.scheduler.start_scheduler()
+        
+        logger.info("Scheduler started successfully")
+        return True
+    except Exception as e:
+        logger.error(f"Error starting scheduler: {str(e)}")
+        return False
+
+def run_weekly_report():
+    """Generate weekly performance reports"""
+    logger.info("Generating weekly reports")
+    
+    try:
+        # Generate report
+        report_path = system.generate_weekly_report()
+        
+        logger.info(f"Weekly report generated: {report_path}")
+        return True
+    except Exception as e:
+        logger.error(f"Error generating weekly report: {str(e)}")
+        return False
+
+def run_trend_analysis():
+    """Run trend analysis to update content recommendations"""
+    logger.info("Running trend analysis")
+    
+    try:
+        # Analyze trends
+        trend_analysis = system.content_analyzer.analyze_all_platforms()
+        
+        logger.info("Trend analysis completed successfully")
+        return True
+    except Exception as e:
+        logger.error(f"Error running trend analysis: {str(e)}")
+        return False
+
+def worker_thread():
+    """Background worker thread function"""
+    logger.info("Starting worker thread")
+    
+    # Run scheduler immediately
+    run_scheduler()
+    
+    # Schedule tasks
+    schedule.every(1).hours.do(run_scheduler)
+    schedule.every().sunday.at("00:00").do(run_weekly_report)
+    schedule.every().day.at("01:00").do(run_trend_analysis)
+    
+    logger.info("Worker tasks scheduled")
+    
+    # Keep the worker running
+    while True:
+        schedule.run_pending()
+        time.sleep(60)
+
+# Start worker thread if enabled
+if os.environ.get('ENABLE_WORKER', 'false').lower() == 'true':
+    worker = threading.Thread(target=worker_thread, daemon=True)
+    worker.start()
+    logger.info("Background worker thread started")
+
+# Web routes
 @app.route('/')
 def home():
     """Home page route"""
@@ -83,9 +155,12 @@ def generate_report():
 @app.route('/api/status', methods=['GET'])
 def status():
     """Check system status"""
+    worker_status = "running" if os.environ.get('ENABLE_WORKER', 'false').lower() == 'true' else "disabled"
+    
     return jsonify({
         "status": "online",
         "version": "1.0.0",
+        "worker": worker_status,
         "config": system.config
     })
 
