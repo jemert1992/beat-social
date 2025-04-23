@@ -1,14 +1,19 @@
 import os
+import sys
+
+# Add the parent directory to the Python path
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 import logging
 import json
 import datetime
 import random
-from .content_analysis.analysis_manager import AnalysisManager
-from .content_creation.tiktok_creator import TikTokContentCreator
-from .content_creation.instagram_creator import InstagramContentCreator
-from .caption_hashtag.generator import CaptionHashtagGenerator
-from .scheduling.scheduler import Scheduler
-from .performance_tracking.tracker import PerformanceTracker
+from src.content_analysis.analysis_manager import AnalysisManager
+from src.content_creation.tiktok_creator import TikTokContentCreator
+from src.content_creation.instagram_creator import InstagramContentCreator
+from src.caption_hashtag.generator import CaptionHashtagGenerator
+from src.scheduling.scheduler import Scheduler
+from src.performance_tracking.tracker import PerformanceTracker
 
 # Configure logging
 logging.basicConfig(
