@@ -1,0 +1,107 @@
+Social Media Content Automation Prompt for Manus AI
+Project Overview
+Create an automated system to generate and post engaging content for TikTok and Instagram in a user-specified niche. The system allows the user to select a niche (e.g., weddings, fitness, travel) and set a daily posting frequency (e.g., 1–3 posts per platform). It analyzes trending content in the niche to inform content creation, using simple assets like stock images, AI-generated visuals, or basic video edits. The system automates content generation, caption creation, hashtag selection, and scheduling/posting, with a focus on simplicity and platform optimization. A weekly performance report helps refine future content.
+Requirements
+1. User Inputs
+
+Niche Selection: Allow the user to specify a niche (e.g., weddings, fitness, travel) via a simple text input or dropdown menu.
+Posting Frequency: Let the user set the number of posts per day for each platform (e.g., 1–3 posts for TikTok, 1–2 for Instagram).
+Content Preferences: Optionally allow the user to specify preferences (e.g., favor quotes, short videos, or carousels) or default to a balanced mix.
+
+2. Content Analysis
+
+Trend Analysis: Scrape or reference trending content in the specified niche on TikTok (e.g., via TikTok Creative Center) and Instagram (e.g., via Explore page or public APIs).
+Identify high-engagement posts (e.g., likes, comments, shares) in the niche.
+Note content types (e.g., quote images, short videos, tutorials) and themes (e.g., for weddings: bridal tips, romantic quotes, venue showcases).
+
+
+Adaptation: Use trending formats as templates but create original content to avoid duplication (e.g., similar aesthetic or tone but unique text/images).
+
+3. Content Creation
+
+Asset Types:
+Use stock images from free platforms (e.g., Unsplash, Pexels) or AI-generated visuals (e.g., via MidJourney, Canva, or DALL·E).
+Create short videos (15–30 seconds) using stock footage or AI-generated clips with text overlays.
+Include text-based content like quotes or tips, styled with niche-appropriate fonts/colors.
+
+
+Content Formats:
+TikTok: Prioritize vertical videos (1080x1920) or image slideshows with music and text overlays, aligned with trending sounds.
+Instagram: Focus on polished images, carousels, or Reels, optimized for 1080x1350 (posts) or 1080x1920 (Reels).
+
+
+Simplicity: Avoid complex production (e.g., no custom shoots or heavy editing). Use templates or pre-built tools for efficiency.
+Branding: Ensure consistent niche-appropriate aesthetics (e.g., soft pastels for weddings, vibrant colors for fitness).
+
+4. Captions and Hashtags
+
+Captions: Generate engaging, niche-specific captions (e.g., for weddings: “Dreaming of your perfect day? 💍 #WeddingInspo”).
+Keep captions short (50–100 characters for TikTok, 100–150 for Instagram).
+Include a call-to-action (e.g., “Follow for more wedding tips!”).
+
+
+Hashtags: Select 5–10 niche-relevant hashtags based on trending and high-engagement tags (e.g., #WeddingPlanning, #BrideToBe).
+Mix broad and niche-specific hashtags for reach and targeting.
+
+
+
+5. Automation and Scheduling
+
+Posting: Automatically schedule and post content to TikTok and Instagram using their APIs or a third-party tool (e.g., Buffer, Later).
+Adhere to user-specified posting frequency and platform best practices (e.g., optimal posting times: 7–9 PM for TikTok, 11 AM–2 PM for Instagram).
+
+
+Error Handling: Include checks for posting failures (e.g., API errors) and notify the user if manual intervention is needed.
+
+6. Performance Tracking
+
+Metrics: Track engagement metrics (likes, comments, shares, views) for each post.
+Weekly Report: Generate a simple report (e.g., PDF or text) summarizing:
+Top-performing posts (by engagement).
+Insights on what worked (e.g., “Quote images outperformed videos this week”).
+Recommendations for future content (e.g., “Increase use of trending wedding hashtags”).
+
+
+Feedback Loop: Use performance data to prioritize successful content types/formats in future posts.
+
+Technical Specifications
+
+Platform: Build as a web-based tool or script compatible with Manus AI’s environment.
+Dependencies:
+Image/Video Tools: Integrate with Unsplash/Pexels APIs, Canva API, or AI image generators.
+Social Media APIs: Use TikTok and Instagram APIs for posting and trend analysis.
+Scheduling: Integrate with Buffer, Later, or similar for automated posting.
+
+
+Data Storage: Store user inputs, content schedules, and performance data in a lightweight database (e.g., SQLite or Supabase).
+Scalability: Ensure the system can handle multiple niches or accounts if expanded later.
+
+Output Format
+
+User Interface: Provide a simple dashboard or CLI for inputting niche, posting frequency, and viewing reports.
+Content Output: Save generated content (images/videos) and metadata (captions, hashtags) in a folder structure (e.g., /niche/date/platform).
+Report: Deliver weekly performance report as a downloadable file or email.
+
+Example Workflow (Wedding Niche)
+
+User selects “weddings” and sets 2 posts/day for TikTok, 1 post/day for Instagram.
+System analyzes trending wedding content (e.g., romantic quote images, bridal prep videos).
+Generates content: a TikTok video with stock footage of a wedding venue and text overlay (“Top 5 Venue Tips!”), an Instagram carousel with AI-generated bouquet images and captions.
+Adds captions (“Plan your dream wedding! 💐”) and hashtags (#WeddingInspo, #Bride2025).
+Schedules posts for optimal times and tracks engagement.
+Weekly report shows quote images had 20% higher engagement, recommends more quote-based content.
+
+Constraints
+
+Keep content creation simple: no custom shoots or complex editing.
+Ensure compliance with TikTok/Instagram policies (e.g., no copyrighted music without permission).
+Stay within Manus AI’s processing limits for API calls and content generation.
+Avoid overfetching data to minimize costs (e.g., limit trend scraping to top 10–20 posts).
+
+Success Criteria
+
+System consistently posts user-specified content on schedule.
+Content aligns with niche trends and achieves engagement (e.g., 100+ likes/post within 1 week).
+Weekly reports provide actionable insights to improve performance.
+User can set up and run the system with minimal technical knowledge.
+
